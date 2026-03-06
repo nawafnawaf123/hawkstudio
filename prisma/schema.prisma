@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+}
+
+model Project {
+  id         String   @id @default(cuid())
+  title      String
+  slug       String   @unique
+  summary    String
+  content    String
+  coverImage String?
+  images     String   @default("[]") // JSON array of strings
+  tech       String   @default("[]") // JSON array of strings
+  liveUrl    String?
+  repoUrl    String?
+  featured   Boolean  @default(false)
+  published  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id              String   @id @default(cuid())
+  siteName        String   @default("Hawk Studio")
+  siteDescription String   @default("حلول برمجية احترافية، مواقع وتطبيقات، وتجارب رقمية بهوية سينمائية.")
+  siteUrl         String   @default("http://localhost:3000")
+  contactPhone    String   @default("+96170000000")
+  contactWhatsApp String   @default("+96170000000")
+  contactEmail    String   @default("hello@hawk.studio")
+  maintenanceMode Boolean  @default(false)
+
+  socialInstagram String?
+  socialX         String?
+  socialLinkedIn  String?
+  socialGithub    String?
+
+  updatedAt       DateTime @updatedAt
+}

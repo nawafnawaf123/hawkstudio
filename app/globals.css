@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #070b0b;
+  --fg: #ecfff4;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  color: var(--fg);
+  background:
+    radial-gradient(1200px 800px at 20% 10%, rgba(0,240,111,0.12), transparent 55%),
+    radial-gradient(900px 600px at 80% 30%, rgba(0,240,111,0.10), transparent 55%),
+    radial-gradient(800px 600px at 50% 90%, rgba(0,240,111,0.08), transparent 60%),
+    #070b0b;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(0,240,111,0.25);
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-4;
+  }
+
+  .card {
+    @apply rounded-2xl border border-white/10 bg-white/5 shadow-soft backdrop-blur;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white shadow-soft transition hover:border-neon-500/40 hover:bg-white/10;
+  }
+
+  .btn-primary {
+    @apply border-neon-500/25 bg-neon-500/10 hover:border-neon-500/55 hover:bg-neon-500/15;
+    box-shadow: 0 0 0 1px rgba(0,240,111,0.25), 0 14px 60px rgba(0,240,111,0.12);
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/85;
+  }
+
+  .glowline {
+    background: linear-gradient(90deg, transparent, rgba(0,240,111,0.5), transparent);
+  }
+
+  .grid-overlay {
+    background-image: radial-gradient(circle at 1px 1px, rgba(0,240,111,0.14) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+}
