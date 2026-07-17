@@ -1,94 +1,17 @@
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import {
-  ShieldCheck,
-  Rocket,
-  Layers3,
-  BadgeCheck,
-  TimerReset,
-  Search,
-} from "lucide-react";
+"use client";
+
+import Link from "next/link";
+import { ArrowUpRight, Gauge, Layers3, MousePointer2, ShieldCheck, Sparkles, Waypoints } from "lucide-react";
+import { useLang } from "@/components/locale/LanguageProvider";
+import { ScrollAnim } from "@/components/animations/ScrollAnim";
+
+const content = {
+  ar: { eyebrow: "لماذا Hawk", title: "لأن التميّز لا يعني أن نضيف أكثر. بل أن نختار أفضل.", desc: "نصمّم المشهد كاملاً: ما تقوله العلامة، كيف تشعر الواجهة، وكيف تعمل تحت السطح. النتيجة تجربة تبدو واثقة بقدر ما هي سلسة.", cards: [["وضوح بصري", "نحوّل الرسالة إلى نظام بصري يوجّه العين ويقود الانتباه بدون ضجيج."], ["حركة مقصودة", "لا حركة للزينة. كل انتقال يدعم السرد ويجعل التفاعل أكثر حياة."], ["أداء حقيقي", "واجهات خفيفة وسريعة لأن أول انطباع يجب أن يصل بلا انتظار."], ["نظام قابل للنمو", "نضع أساساً منظماً يساعد حضورك الرقمي على التوسع بثقة."], ["تركيز على الإنسان", "نتخذ كل قرار من منظور الشخص الذي سيستخدم التجربة، لا من منظور التقنية فقط."], ["تنفيذ دقيق", "من الفكرة إلى التفاصيل الأخيرة، نبقى قريبين من الرؤية التي اتفقنا عليها."]], cta: "لنتحدث عن فكرتك" },
+  en: { eyebrow: "Why Hawk", title: "Because distinction is not adding more. It is choosing better.", desc: "We design the whole scene: what the brand says, how the interface feels, and how it works beneath the surface. The result is an experience that feels as confident as it is effortless.", cards: [["Visual clarity", "We turn the message into a visual system that guides the eye without creating noise."], ["Purposeful motion", "No movement for decoration. Every transition supports the story and makes interaction feel alive."], ["True performance", "Light, fast interfaces—because a first impression should arrive without waiting."], ["A system that grows", "We establish an ordered foundation for your digital presence to expand with confidence."], ["Human focus", "Every decision starts from the person using the experience, not the technology alone."], ["Careful execution", "From the first thought to the final detail, we stay close to the vision we agreed on."]], cta: "Talk through your idea" },
+} as const;
+const icons = [Sparkles, MousePointer2, Gauge, Layers3, Waypoints, ShieldCheck];
 
 export default function WhyUsPage() {
-  return (
-    <div className="container-x py-10">
-      <SectionTitle
-        eyebrow="WHY US"
-        title="لماذا Hawk Studio؟"
-        desc="لأننا لا نبني مجرد موقع، بل نبني حضورًا رقميًا قويًا وسريعًا وقابلًا للتوسع."
-      />
-
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card
-          icon={Rocket}
-          title="سرعة تنفيذ"
-          desc="بنية جاهزة واحترافية تقلل الوقت وتسرع الانطلاق."
-        />
-        <Card
-          icon={ShieldCheck}
-          title="ثبات وأمان"
-          desc="معالجة للمشاكل الأساسية ومنع الإعدادات من تخريب الموقع."
-        />
-        <Card
-          icon={Search}
-          title="SEO قوي"
-          desc="تهيئة للمحركات من البداية: Metadata و Sitemap و Robots."
-        />
-        <Card
-          icon={Layers3}
-          title="لوحة إدارة سهلة"
-          desc="إضافة وتعديل الأعمال وتفعيل الصيانة بسهولة ومن مكان واحد."
-        />
-        <Card
-          icon={TimerReset}
-          title="قابلية التطوير"
-          desc="الموقع مبني بحيث يتوسع لاحقًا بدون إعادة بناء من الصفر."
-        />
-        <Card
-          icon={BadgeCheck}
-          title="هوية احترافية"
-          desc="تصميم متناسق مع هوية Hawk Studio الخضراء والسوداء."
-        />
-      </div>
-
-      <div className="mt-10 card p-6">
-        <h3 className="text-lg font-semibold text-white">ماذا تستفيد معنا؟</h3>
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
-            موقع سريع، أنيق، ويعطي انطباع احترافي من أول زيارة.
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
-            لوحة إدارة واضحة تسمح لك بنشر أعمالك وتحديثها بسهولة.
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
-            توافق ممتاز مع التوسع لاحقًا وإضافة صفحات أو خدمات جديدة.
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
-            شكل بصري متناسق مع هوية العلامة ويعطي طابعًا أقوى للثقة.
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Card({
-  icon: Icon,
-  title,
-  desc,
-}: {
-  icon: any;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <div className="card p-6">
-      <div className="flex items-center gap-3">
-        <div className="card flex h-11 w-11 items-center justify-center">
-          <Icon className="h-5 w-5 text-neon-300" />
-        </div>
-        <div className="text-base font-semibold">{title}</div>
-      </div>
-      <div className="mt-3 text-sm text-white/70">{desc}</div>
-    </div>
-  );
+  const { lang } = useLang(); const c = content[lang];
+  return <div className="container-x py-16 md:py-24"><ScrollAnim><section className="why-hero"><span className="eyebrow-text">{c.eyebrow}</span><h1>{c.title}</h1><p>{c.desc}</p></section></ScrollAnim><section className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{c.cards.map(([title, desc], i) => {const Icon=icons[i]; return <ScrollAnim key={title} delay={(i % 3) * .08}><article className="why-card"><span className="why-icon"><Icon className="h-5 w-5" /></span><span className="why-index">0{i + 1}</span><h2>{title}</h2><p>{desc}</p></article></ScrollAnim>})}</section><ScrollAnim><div className="why-cta mt-14"><div><span className="eyebrow-text">HAWK / YOUR NEXT MOVE</span><h2>{lang === "ar" ? "الفكرة القوية تستحق تجربة توازيها." : "A strong idea deserves an experience to match."}</h2></div><Link href="/contact" className="btn btn-primary">{c.cta}<ArrowUpRight className="h-4 w-4" /></Link></div></ScrollAnim></div>;
 }

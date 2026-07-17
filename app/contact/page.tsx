@@ -1,71 +1,16 @@
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import { ContactForm } from "@/components/contact/ContactForm";
-import { getPublicSettings } from "@/lib/settings";
-import { Mail, Phone, MessageCircle } from "lucide-react";
+"use client";
 
-export const dynamic = "force-dynamic";
+import { Mail, MessageCircle, Phone, Send } from "lucide-react";
+import { useLang } from "@/components/locale/LanguageProvider";
+import { site, whatsappLink } from "@/lib/site";
 
-export default async function ContactPage() {
-  const s = await getPublicSettings();
-  const wa = s.contactWhatsApp?.replace(/\s+/g, "");
-  const waLink = wa ? `https://wa.me/${wa.replace(/^\+/, "")}` : null;
-
-  return (
-    <div className="container-x py-10">
-      <SectionTitle
-        eyebrow="CONTACT"
-        title="تواصل معنا"
-        desc="اكتب التفاصيل وسنرجع لك بسرعة."
-      />
-
-      <div className="grid gap-6 lg:grid-cols-5">
-        <div className="lg:col-span-3">
-          <div className="card p-6">
-            <ContactForm />
-          </div>
-        </div>
-
-        <div className="lg:col-span-2">
-          <div className="card p-6">
-            <div className="text-sm font-semibold">معلومات التواصل</div>
-
-            <div className="mt-4 space-y-3 text-sm text-white/75">
-              <InfoRow icon={Phone} label="الهاتف" value={s.contactPhone} href={s.contactPhone ? `tel:${s.contactPhone}` : undefined} />
-              <InfoRow icon={Mail} label="الإيميل" value={s.contactEmail} href={s.contactEmail ? `mailto:${s.contactEmail}` : undefined} />
-              <InfoRow icon={MessageCircle} label="واتساب" value={s.contactWhatsApp} href={waLink || undefined} />
-            </div>
-
-            <div className="mt-6 card p-4">
-              <div className="text-xs font-semibold text-white/80">ملاحظة</div>
-              <div className="mt-1 text-xs text-white/60">
-                يمكنك إدارة كل شيء من لوحة الإدارة: إضافة أعمال، تغيير البيانات، وتفعيل الصيانة.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function InfoRow({ icon: Icon, label, value, href }: { icon: any; label: string; value: string; href?: string }) {
-  const content = (
-    <div className="flex items-center gap-3">
-      <div className="card flex h-10 w-10 items-center justify-center">
-        <Icon className="h-5 w-5 text-neon-300" />
-      </div>
-      <div>
-        <div className="text-xs text-white/55">{label}</div>
-        <div className="text-sm">{value}</div>
-      </div>
-    </div>
-  );
-
-  return href ? (
-    <a className="block rounded-xl p-2 transition hover:bg-white/5" href={href} target={href.startsWith("http") ? "_blank" : undefined}>
-      {content}
-    </a>
-  ) : (
-    <div className="rounded-xl p-2">{content}</div>
-  );
+export default function ContactPage() {
+  const { lang } = useLang();
+  const c = lang === "ar" ? { eyebrow:"ابدأ المحادثة", title:"لنحوّل الفكرة إلى حضور يصعب تجاهله.", desc:"اختر وسيلة التواصل التي تناسبك. لا توجد نماذج تحفظ بياناتك هنا—فقط بداية محادثة مباشرة وواضحة.", direct:"تواصل مباشر", note:"أخبرنا عن فكرتك، المجال، وما الذي تريد أن يشعر به جمهورك." } : { eyebrow:"Start the conversation", title:"Let’s turn the idea into a presence that is hard to ignore.", desc:"Choose the channel that suits you. There are no forms collecting your data here—just a direct, clear conversation.", direct:"Direct contact", note:"Tell us about the idea, the space you are in, and how you want your audience to feel." };
+  const items = [
+    { icon: Phone, label:lang === "ar" ? `اتصال عادي — ${site.phone}` : `Phone call — ${site.phone}`, value:lang === "ar" ? "اتصل بنا مباشرة" : "Call us directly", href:`tel:${site.phoneHref}` },
+    { icon: MessageCircle, label:`WhatsApp — ${site.phone}`, value:lang === "ar" ? "افتح محادثة واتساب فوراً" : "Open a WhatsApp conversation instantly", href:whatsappLink },
+    { icon: Mail, label:site.email, value:lang === "ar" ? "أرسل تفاصيل فكرتك" : "Send us the shape of your idea", href:`mailto:${site.email}` },
+  ];
+  return <div className="container-x py-16 md:py-24"><section className="contact-hero"><span className="eyebrow-text">{c.eyebrow}</span><h1>{c.title}</h1><p>{c.desc}</p></section><div className="mt-14 grid gap-4 lg:grid-cols-[1.2fr_.8fr]"><div className="contact-list">{items.map(({icon:Icon,label,value,href},i)=><a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="contact-option"><span><Icon className="h-6 w-6" /></span><div><strong>{label}</strong><p>{value}</p></div><Send className="ms-auto h-4 w-4 text-neon-300" /><small>0{i+1}</small></a>)}</div><aside className="contact-note"><div className="contact-note-icon"><MessageCircle className="h-6 w-6" /></div><span className="eyebrow-text">{c.direct}</span><h2>{c.note}</h2><p>{lang === "ar" ? "نردّ عليك عبر القناة التي تختارها، لنفهم الاتجاه ونرسم بداية مناسبة." : "We will reply through your chosen channel, understand the direction, and shape the right starting point."}</p></aside></div></div>;
 }

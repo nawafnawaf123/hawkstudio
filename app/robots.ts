@@ -1,18 +1,8 @@
-import { getPublicSettings } from "@/lib/settings";
+import type { MetadataRoute } from "next";
 
-export default async function robots() {
-  const s = await getPublicSettings();
-  const site = s.siteUrl || "http://localhost:3000";
-
-  if (s.maintenanceMode) {
-    return {
-      rules: [{ userAgent: "*", disallow: "/" }],
-      sitemap: `${site}/sitemap.xml`,
-    };
-  }
-
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: `${site}/sitemap.xml`,
+    sitemap: "https://hawk.studio/sitemap.xml",
   };
 }
