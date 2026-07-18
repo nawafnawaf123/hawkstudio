@@ -1,7 +1,7 @@
 export const site = {
   name: "Hawk Studio",
   description:
-    "Hawk Studio creates bold digital identities, high-performance websites, and modern Android and iOS apps.",
+    "Hawk Studio استوديو لتصميم وبرمجة المواقع وتطبيقات Android وiOS، نصنع هويات رقمية وواجهات سريعة وتجارب مستخدم حديثة من الفكرة حتى الإطلاق.",
   email: "contact@hawkstudio.cfd",
   phone: "71235414",
   phoneHref: "+96171235414",
