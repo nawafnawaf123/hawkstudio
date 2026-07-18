@@ -28,8 +28,8 @@ export function Footer() {
   }, []);
 
   const text = lang === "ar"
-    ? { heading: "لنصنع حضوراً يصعب تجاهله.", intro: "مواقع وتطبيقات Android وiOS وتجارب رقمية للعلامات التي تريد أن تظهر بثقة.", top: "إلى الأعلى" }
-    : { heading: "Let’s make a presence that is hard to ignore.", intro: "Websites, Android and iOS apps, and digital experiences for brands that want to show up with confidence.", top: "Back to top" };
+    ? { heading: "لنصنع حضوراً يصعب تجاهله.", intro: "مواقع وتطبيقات Android وiOS وتجارب رقمية للعلامات التي تريد أن تظهر بثقة.", top: "إلى الأعلى", rights: `جميع الحقوق محفوظة لدى ${site.name}.` }
+    : { heading: "Let’s make a presence that is hard to ignore.", intro: "Websites, Android and iOS apps, and digital experiences for brands that want to show up with confidence.", top: "Back to top", rights: `All rights reserved by ${site.name}.` };
 
   return (
     <footer className="site-footer">
@@ -66,7 +66,7 @@ export function Footer() {
             </div>
           </div>
         </div></ScrollAnim>
-        <ScrollAnim delay={0.14}><div className="footer-bottom"><span>© {new Date().getFullYear()} HAWK STUDIO</span><button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{text.top} ↑</button></div></ScrollAnim>
+        <ScrollAnim delay={0.14}><div className="footer-bottom"><div className="footer-rights"><span>© {new Date().getFullYear()} HAWK STUDIO</span><small>{text.rights}</small></div><button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{text.top} ↑</button></div></ScrollAnim>
       </div>
     </footer>
   );
