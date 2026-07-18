@@ -397,7 +397,8 @@ html[data-theme="dark"] .process-timeline .process-card { background:rgba(8,9,7,
 .statement-reveal { position:relative; z-index:1; }
 .statement-reveal .statement-grid { position:relative; z-index:2; }
 .statement-ambient { position:absolute; z-index:0; inset:-4rem -2rem -3rem; overflow:hidden; pointer-events:none; }
-.statement-ambient-word { position:absolute; inset-inline-start:-.04em; bottom:-.3em; color:transparent; font-size:clamp(14rem,30vw,32rem); font-weight:850; line-height:.8; letter-spacing:-.1em; -webkit-text-stroke:1px var(--line); opacity:.34; animation:statement-word-drift 12s ease-in-out infinite alternate; animation-play-state:paused; will-change:transform; }
+.statement-ambient-word { position:absolute; inset-inline-start:-.04em; bottom:-.14em; color:transparent; font-size:clamp(14rem,30vw,32rem); font-weight:850; line-height:.8; letter-spacing:-.1em; -webkit-text-stroke:1px var(--line); opacity:.52; animation:statement-word-drift 12s ease-in-out infinite alternate; animation-play-state:paused; will-change:transform; }
+html[data-theme="dark"] .statement-ambient-word { opacity:.7; }
 .statement-ambient-ring { position:absolute; left:2%; display:block; border:1px solid var(--line); border-top-color:var(--lime); border-radius:50%; animation:statement-ambient-spin 16s linear infinite; animation-play-state:paused; will-change:transform; }
 .statement-ambient-ring::after { content:""; position:absolute; top:50%; right:-.25rem; width:.48rem; height:.48rem; border-radius:50%; background:var(--lime); box-shadow:0 0 0 .35rem rgba(184,255,69,.1); }
 .statement-ambient-ring-large { top:12%; width:10rem; height:10rem; }
@@ -441,7 +442,8 @@ html[data-theme="dark"] .process-timeline .process-card { background:rgba(8,9,7,
   .statement-grid p { margin-top:1.5rem; font-size:.85rem; }
   .statement-cta-row { margin-top:1.8rem; }
   .statement-ambient { inset:-2rem -.7rem -2rem; }
-  .statement-ambient-word { bottom:.05em; font-size:11rem; opacity:.24; }
+  .statement-ambient-word { bottom:.08em; font-size:11rem; opacity:.34; }
+  html[data-theme="dark"] .statement-ambient-word { opacity:.46; }
   .statement-ambient-ring-large { top:8%; left:-2.2rem; width:7rem; height:7rem; }
   .statement-ambient-ring-small { top:21%; left:.7rem; width:3.2rem; height:3.2rem; }
   .statement-ambient-dot { top:11%; inset-inline-end:1rem; }
