@@ -49,10 +49,12 @@ button { font: inherit; }
 .wordmark-symbol { position:relative; display:block; width:3.2rem; min-width:3.2rem; height:3.2rem; overflow:hidden; border:1px solid var(--line); border-radius:50%; background:var(--paper); box-shadow:0 .5rem 1.4rem rgba(16,16,15,.09); }
 .header-logo-crop { position:absolute; top:50%; left:50%; width:5.7rem; height:5.7rem; transform:translate(-50%,-50%); transition:transform .35s ease; }.header-logo-image { object-fit:cover; transition:opacity .35s ease; }.wordmark:hover .header-logo-crop { transform:translate(-50%,-50%) scale(1.035); }
 .wordmark small { display: block; margin-top: .35rem; color: var(--muted); font-size: .48rem; font-weight: 700; letter-spacing: .23em; }
-.desktop-nav { display: flex; align-items: center; gap: 2rem; }
-.desktop-nav a { position: relative; color: #31312d; font-size: .76rem; font-weight: 600; }
-.desktop-nav a:after { content: ""; position: absolute; right: 0; bottom: -.45rem; left: 0; height: 1px; background: var(--ink); transform: scaleX(0); transition: transform .25s ease; }
+.desktop-nav { display: flex; align-items: center; gap: .45rem; }
+.desktop-nav a { position: relative; border-radius:999px; padding:.62rem .9rem; color: #31312d; font-size: .76rem; font-weight: 600; transition:color .25s ease,background-color .25s ease,transform .25s ease; }
+.desktop-nav a:after { content: ""; position: absolute; right:.9rem; bottom:.38rem; left:.9rem; height:1px; background:#10100f; transform:scaleX(0); transition:transform .25s ease; }
 .desktop-nav a:hover:after { transform: scaleX(1); }
+.desktop-nav a:hover,.desktop-nav a:focus-visible { color:#10100f; background:var(--lime); transform:translateY(-2px); }
+.desktop-nav a:focus-visible { outline:2px solid var(--lime); outline-offset:3px; }
 .nav-actions { display: flex; align-items: center; gap: .55rem; }
 .language-switch,.theme-switch { display: inline-flex; width: 2.7rem; min-width: 2.7rem; height: 2.7rem; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: transparent; cursor: pointer; font-size: .68rem; font-weight: 700; transition: .25s ease; }
 .language-switch:hover,.theme-switch:hover { color: var(--paper); background: var(--ink); }
@@ -98,7 +100,7 @@ html[data-theme="dark"] .theme-asset-dark { opacity:1; }
 
 /* Footer */
 .site-footer { padding:clamp(4.5rem,9vw,8rem) 0 1.5rem;color:var(--paper);background:var(--ink); }.footer-heading { display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;padding-bottom:4rem;border-bottom:1px solid rgba(255,255,255,.22); }.footer-heading span { color:#a6a69d;font-size:.58rem;font-weight:700;letter-spacing:.16em; }.footer-heading h2 { max-width:56rem;margin-top:1.5rem;font-size:clamp(2.7rem,6vw,6.4rem);font-weight:500;line-height:1.03;letter-spacing:-.07em; }.footer-round-link { display:grid;width:6rem;height:6rem;flex:none;place-items:center;border-radius:50%;color:var(--ink);background:var(--lime);transition:transform .3s ease; }.footer-round-link:hover { transform:rotate(-10deg) scale(1.04); }.footer-round-link svg { width:1.3rem; }.footer-grid { display:grid;grid-template-columns:1.2fr .55fr .8fr;gap:3rem;padding:3rem 0; }.footer-grid p { max-width:27rem;color:#a6a69d;font-size:.82rem;line-height:1.8; }.footer-nav,.footer-contact { display:grid;align-content:start;gap:.7rem;font-size:.75rem; }.footer-contact { color:#a6a69d; }.footer-grid a:hover { color:var(--lime); }.footer-bottom { display:flex;justify-content:space-between;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.18);color:#818178;font-size:.58rem;letter-spacing:.08em; }.footer-bottom button { border:0;color:inherit;background:transparent;cursor:pointer; }
-.footer-rights { display:grid; gap:.35rem; }.footer-rights small { color:#a6a69d; font-size:.58rem; letter-spacing:0; }
+.footer-rights { display:grid; gap:.4rem; }.footer-rights small { color:#d5d4cc; font-size:.68rem; font-weight:600; letter-spacing:0; }
 
 @media (max-width: 1024px) {
   .desktop-nav,.nav-cta { display:none; }.mobile-menu-button { display:flex; }
@@ -494,4 +496,10 @@ html[data-theme="dark"] .statement-ambient-word { opacity:.7; }
 .mobile-menu-top button:focus-visible {
   outline:2px solid var(--lime);
   outline-offset:3px;
+}
+
+html .desktop-nav a:hover,
+html .desktop-nav a:focus-visible {
+  color:#10100f;
+  background:var(--lime);
 }

@@ -66,7 +66,13 @@ export function Footer() {
             </div>
           </div>
         </div></ScrollAnim>
-        <ScrollAnim delay={0.14}><div className="footer-bottom"><div className="footer-rights"><span>© {new Date().getFullYear()} HAWK STUDIO</span><small>{text.rights}</small></div><button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{text.top} ↑</button></div></ScrollAnim>
+        <div className="footer-bottom">
+          <div className="footer-rights">
+            <span>© {new Date().getFullYear()} HAWK STUDIO</span>
+            <small>{text.rights}</small>
+          </div>
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{text.top} ↑</button>
+        </div>
       </div>
     </footer>
   );
