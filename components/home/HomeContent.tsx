@@ -5,6 +5,9 @@ import Link from "next/link";
 import { ArrowDownLeft, ArrowUpLeft, Asterisk, Braces, MoveUpLeft, PenTool, Rocket, Search, Smartphone, Sparkles } from "lucide-react";
 import { useLang } from "@/components/locale/LanguageProvider";
 import { ScrollAnim } from "@/components/animations/ScrollAnim";
+import { MagneticLink } from "@/components/animations/MagneticLink";
+import { ScrollScene } from "@/components/animations/ScrollScene";
+import { MotionSignalLab } from "@/components/home/MotionSignalLab";
 
 const copy = {
   ar: {
@@ -70,34 +73,36 @@ export function HomeContent() {
             <div className="hero-copy-bottom">
               <p>{c.intro}</p>
               <div className="hero-actions">
-                <Link href="/contact" className="button button-dark">{c.start}<ArrowUpLeft className="rtl-arrow" /></Link>
+                <MagneticLink href="/contact" className="button button-dark">{c.start}<ArrowUpLeft className="rtl-arrow" /></MagneticLink>
                 <Link href="/about" className="text-link">{c.discover}<ArrowDownLeft className="rtl-arrow" /></Link>
               </div>
             </div>
           </div>
 
-          <div className="hero-stage" role="img" aria-label="Hawk Studio brand mark">
-            <Image
-              src="/brand/website_light.png"
-              alt=""
-              fill
-              priority
-              quality={88}
-              sizes="(max-width: 1024px) calc(100vw - 2.5rem), 38vw"
-              className="hero-brand-image theme-asset-dark"
-              draggable={false}
-            />
-            <Image
-              src="/brand/website_dark.png"
-              alt=""
-              fill
-              priority
-              quality={88}
-              sizes="(max-width: 1024px) calc(100vw - 2.5rem), 38vw"
-              className="hero-brand-image theme-asset-light"
-              draggable={false}
-            />
-          </div>
+          <ScrollScene className="hero-scene">
+            <div className="hero-stage" role="img" aria-label="Hawk Studio brand mark">
+              <Image
+                src="/brand/website_light.png"
+                alt=""
+                fill
+                priority
+                quality={88}
+                sizes="(max-width: 1024px) calc(100vw - 2.5rem), 38vw"
+                className="hero-brand-image theme-asset-dark"
+                draggable={false}
+              />
+              <Image
+                src="/brand/website_dark.png"
+                alt=""
+                fill
+                priority
+                quality={88}
+                sizes="(max-width: 1024px) calc(100vw - 2.5rem), 38vw"
+                className="hero-brand-image theme-asset-light"
+                draggable={false}
+              />
+            </div>
+          </ScrollScene>
         </div>
       </section>
 
@@ -132,6 +137,8 @@ export function HomeContent() {
           </div>
         </div>
       </section>
+
+      <MotionSignalLab />
 
       <section id="process" className="process-section container-x">
         <ScrollAnim><div className="process-intro"><div className="section-kicker"><span>03</span>{c.processLabel}</div><h2>{c.processTitle}</h2></div></ScrollAnim>

@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from "next";
 import { Navbar } from "@/components/nav/Navbar";
 import { Footer } from "@/components/nav/Footer";
 import { LanguageProvider } from "@/components/locale/LanguageProvider";
+import { PageMotion } from "@/components/animations/PageMotion";
 import { site } from "@/lib/site";
 
 export const viewport: Viewport = {
@@ -115,6 +116,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         <LanguageProvider>
+          <PageMotion />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

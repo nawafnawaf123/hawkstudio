@@ -5,12 +5,15 @@ import Link from "next/link";
 import { ArrowUpLeft, MessageCircle, Phone } from "lucide-react";
 import { useLang } from "@/components/locale/LanguageProvider";
 import { ScrollAnim } from "@/components/animations/ScrollAnim";
+import { MagneticLink } from "@/components/animations/MagneticLink";
 import { site, whatsappLink } from "@/lib/site";
 
 export function Footer() {
   const { lang, t } = useLang();
   const [phoneMenuOpen, setPhoneMenuOpen] = useState(false);
+  const [footerVisible, setFooterVisible] = useState(false);
   const phoneMenuRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const closeOutside = (event: PointerEvent) => {
@@ -27,16 +30,35 @@ export function Footer() {
     };
   }, []);
 
+  useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(([entry]) => setFooterVisible(entry.isIntersecting), { threshold: 0.08 });
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
   const text = lang === "ar"
     ? { heading: "لنصنع حضوراً يصعب تجاهله.", intro: "مواقع وتطبيقات Android وiOS وتجارب رقمية للعلامات التي تريد أن تظهر بثقة.", top: "إلى الأعلى", rights: `جميع الحقوق محفوظة لدى ${site.name}.` }
     : { heading: "Let’s make a presence that is hard to ignore.", intro: "Websites, Android and iOS apps, and digital experiences for brands that want to show up with confidence.", top: "Back to top", rights: `All rights reserved by ${site.name}.` };
 
   return (
-    <footer className="site-footer">
+    <footer ref={footerRef} className={`site-footer ${footerVisible ? "is-motion-active" : ""}`}>
+      <div className="footer-motion-bg" aria-hidden="true">
+        <span className="footer-motion-grid" />
+        <span className="footer-motion-aurora" />
+        <strong>HAWK</strong>
+      </div>
+      <div className="footer-motion-marquee" aria-hidden="true">
+        <div>
+          <span>DESIGN</span><i /> <span>WEB</span><i /> <span>ANDROID</span><i /> <span>iOS</span><i /> <span>CODE</span><i /> <span>MOTION</span><i />
+          <span>DESIGN</span><i /> <span>WEB</span><i /> <span>ANDROID</span><i /> <span>iOS</span><i /> <span>CODE</span><i /> <span>MOTION</span><i />
+        </div>
+      </div>
       <div className="container-x">
         <ScrollAnim><div className="footer-heading">
           <div><span>HAWK / DIGITAL STUDIO</span><h2>{text.heading}</h2></div>
-          <a href={whatsappLink} target="_blank" rel="noreferrer" className="footer-round-link"><ArrowUpLeft className="rtl-arrow" /></a>
+          <MagneticLink href={whatsappLink} target="_blank" rel="noreferrer" className="footer-round-link"><ArrowUpLeft className="rtl-arrow" /></MagneticLink>
         </div></ScrollAnim>
         <ScrollAnim delay={0.08}><div className="footer-grid">
           <p>{text.intro}</p>
