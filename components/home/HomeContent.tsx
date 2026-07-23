@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDownLeft, ArrowUpLeft, Asterisk, Braces, MoveUpLeft, PenTool, Rocket, Search, Smartphone, Sparkles } from "lucide-react";
+import { ArrowDownLeft, ArrowUpLeft, Braces, MoveUpLeft, PenTool, Rocket, Search, Smartphone, Sparkles } from "lucide-react";
 import { useLang } from "@/components/locale/LanguageProvider";
 import { ScrollAnim } from "@/components/animations/ScrollAnim";
 import { MagneticLink } from "@/components/animations/MagneticLink";
@@ -74,7 +74,7 @@ export function HomeContent() {
               <p>{c.intro}</p>
               <div className="hero-actions">
                 <MagneticLink href="/contact" className="button button-dark">{c.start}<ArrowUpLeft className="rtl-arrow" /></MagneticLink>
-                <Link href="/about" className="text-link">{c.discover}<ArrowDownLeft className="rtl-arrow" /></Link>
+                <Link href="/about" prefetch={false} className="text-link">{c.discover}<ArrowDownLeft className="rtl-arrow" /></Link>
               </div>
             </div>
           </div>
@@ -106,7 +106,7 @@ export function HomeContent() {
         </div>
       </section>
 
-      <div className="ticker" aria-hidden="true"><div>{[...c.ticker, ...c.ticker, ...c.ticker, ...c.ticker, ...c.ticker, ...c.ticker].map((item, i) => <span key={`${item}-${i}`}>{item}<Asterisk /></span>)}</div></div>
+      <div className="ticker" aria-hidden="true"><div>{[...c.ticker, ...c.ticker, ...c.ticker, ...c.ticker].map((item, i) => <span key={`${item}-${i}`}>{item}<i /></span>)}</div></div>
 
       <section id="studio" className="statement-section container-x">
         <ScrollAnim direction="right" className="statement-reveal">
@@ -123,7 +123,7 @@ export function HomeContent() {
             <div className="statement-copy">
               <h2>{c.statement}</h2>
               <p>{c.statementBody}</p>
-              <div className="statement-cta-row"><Link href="/about" className="circle-link" aria-label={c.discover}><MoveUpLeft className="rtl-arrow" /></Link><span>{c.discover}</span></div>
+              <div className="statement-cta-row"><Link href="/about" prefetch={false} className="circle-link" aria-label={c.discover}><MoveUpLeft className="rtl-arrow" /></Link><span>{c.discover}</span></div>
             </div>
           </div>
         </ScrollAnim>
@@ -162,7 +162,7 @@ export function HomeContent() {
         </ScrollAnim>
       </section>
 
-      <section className="container-x final-cta-wrap"><ScrollAnim direction="zoom"><div className="final-cta"><div className="final-cta-mark">H</div><div className="section-kicker light"><span>04</span>{c.closeLabel}</div><h2>{c.closeTitle}</h2><Link href="/contact" className="button button-lime">{c.closeButton}<ArrowUpLeft className="rtl-arrow" /></Link></div></ScrollAnim></section>
+      <section className="container-x final-cta-wrap"><ScrollAnim direction="zoom"><div className="final-cta"><div className="final-cta-mark">H</div><div className="section-kicker light"><span>04</span>{c.closeLabel}</div><h2>{c.closeTitle}</h2><Link href="/contact" prefetch={false} className="button button-lime">{c.closeButton}<ArrowUpLeft className="rtl-arrow" /></Link></div></ScrollAnim></section>
     </div>
   );
 }

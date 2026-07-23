@@ -24,26 +24,9 @@ export function Navbar() {
 
   useEffect(() => {
     const routes = ["/", ...links.map(([href]) => href)];
-    const warmRoutes = () => {
-      routes.forEach((href) => {
-        router.prefetch(href);
-        if (process.env.NODE_ENV === "development" && href !== window.location.pathname) {
-          void fetch(href, { credentials: "same-origin" }).catch(() => undefined);
-        }
-      });
-    };
-
-    const idleWindow = window as Window & {
-      requestIdleCallback?: (callback: () => void) => number;
-      cancelIdleCallback?: (id: number) => void;
-    };
-
-    if (idleWindow.requestIdleCallback) {
-      const idleId = idleWindow.requestIdleCallback(warmRoutes);
-      return () => idleWindow.cancelIdleCallback?.(idleId);
-    }
-
-    const timer = window.setTimeout(warmRoutes, 250);
+    const timer = window.setTimeout(() => {
+      routes.forEach((href) => router.prefetch(href));
+    }, 5000);
     return () => window.clearTimeout(timer);
   }, [router]);
 
@@ -56,7 +39,7 @@ export function Navbar() {
     <>
       <header className="site-header">
         <div className="container-x nav-shell">
-          <Link href="/" prefetch className="wordmark" aria-label="Hawk Studio home">
+          <Link href="/" prefetch={false} className="wordmark" aria-label="Hawk Studio home">
             <span className="wordmark-symbol" aria-hidden="true">
               <span className="header-logo-crop">
                 <Image src="/brand/logo_light.png" alt="" fill sizes="96px" quality={100} loading="eager" className="header-logo-image theme-asset-dark" />
@@ -67,7 +50,17 @@ export function Navbar() {
           </Link>
 
           <nav className="desktop-nav" aria-label="Main navigation">
-            {links.map(([href, key]) => <Link href={href} prefetch key={href}>{t(key)}</Link>)}
+            {links.map(([href, key]) => (
+              <Link
+                href={href}
+                prefetch={false}
+                key={href}
+                onPointerEnter={() => router.prefetch(href)}
+                onFocus={() => router.prefetch(href)}
+              >
+                {t(key)}
+              </Link>
+            ))}
           </nav>
 
           <div className="nav-actions">
@@ -88,7 +81,7 @@ export function Navbar() {
         </div>
         <nav>
           {links.map(([href, key], index) => (
-            <Link href={href} prefetch key={href} onClick={() => setOpen(false)}>
+            <Link href={href} prefetch={false} key={href} onClick={() => setOpen(false)}>
               <small>0{index + 1}</small><span>{t(key)}</span><ArrowUpLeft className="rtl-arrow" />
             </Link>
           ))}

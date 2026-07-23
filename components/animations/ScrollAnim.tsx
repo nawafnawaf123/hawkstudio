@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
 type Direction = "up" | "down" | "left" | "right" | "fade" | "zoom" | "flip";
 
@@ -20,25 +20,18 @@ export function ScrollAnim({
   once?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [ready, setReady] = useState(false);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
     if (!element || typeof IntersectionObserver === "undefined") return;
 
-    if (element.getBoundingClientRect().top < window.innerHeight * 0.92) {
-      setVisible(true);
-      return;
-    }
-
-    setReady(true);
     const observer = new IntersectionObserver(([entry]) => {
+      element.classList.add("reveal-ready");
       if (entry.isIntersecting) {
-        setVisible(true);
+        element.classList.add("reveal-visible");
         if (once) observer.disconnect();
       } else if (!once) {
-        setVisible(false);
+        element.classList.remove("reveal-visible");
       }
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
 
@@ -55,7 +48,7 @@ export function ScrollAnim({
     <div
       ref={ref}
       data-direction={direction}
-      className={`scroll-reveal ${ready ? "reveal-ready" : ""} ${visible ? "reveal-visible" : ""} ${className}`}
+      className={`scroll-reveal ${className}`}
       style={style}
     >
       {children}

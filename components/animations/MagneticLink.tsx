@@ -46,6 +46,7 @@ export function MagneticLink({
     <Link
       ref={ref}
       href={href}
+      prefetch={false}
       className={`magnetic-link ${className}`}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}

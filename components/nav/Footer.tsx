@@ -58,12 +58,20 @@ export function Footer() {
       <div className="container-x">
         <ScrollAnim><div className="footer-heading">
           <div><span>HAWK / DIGITAL STUDIO</span><h2>{text.heading}</h2></div>
-          <MagneticLink href={whatsappLink} target="_blank" rel="noreferrer" className="footer-round-link"><ArrowUpLeft className="rtl-arrow" /></MagneticLink>
+          <MagneticLink
+            href={whatsappLink}
+            target="_blank"
+            rel="noreferrer"
+            className="footer-round-link"
+            aria-label={lang === "ar" ? "تواصل مع Hawk Studio عبر واتساب" : "Contact Hawk Studio on WhatsApp"}
+          >
+            <ArrowUpLeft className="rtl-arrow" />
+          </MagneticLink>
         </div></ScrollAnim>
         <ScrollAnim delay={0.08}><div className="footer-grid">
           <p>{text.intro}</p>
           <div className="footer-nav">
-            <Link href="/services">{t("nav.services")}</Link><Link href="/about">{t("nav.about")}</Link><Link href="/contact">{t("nav.contact")}</Link>
+            <Link href="/services" prefetch={false}>{t("nav.services")}</Link><Link href="/about" prefetch={false}>{t("nav.about")}</Link><Link href="/contact" prefetch={false}>{t("nav.contact")}</Link>
           </div>
           <div className="footer-contact">
             <a href={`mailto:${site.email}`}>{site.email}</a>

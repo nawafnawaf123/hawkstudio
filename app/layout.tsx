@@ -1,11 +1,24 @@
-/* eslint-disable @next/next/no-page-custom-font */
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
+import { Alexandria, Manrope } from "next/font/google";
 import { Navbar } from "@/components/nav/Navbar";
 import { Footer } from "@/components/nav/Footer";
 import { LanguageProvider } from "@/components/locale/LanguageProvider";
 import { PageMotion } from "@/components/animations/PageMotion";
 import { site } from "@/lib/site";
+
+const alexandria = Alexandria({
+  subsets: ["arabic", "latin"],
+  display: "swap",
+  variable: "--font-alexandria",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+  variable: "--font-manrope",
+});
 
 export const viewport: Viewport = {
   themeColor: "#f2f0e9",
@@ -22,9 +35,13 @@ export const metadata: Metadata = {
   publisher: site.name,
   category: "technology",
   icons: {
-    icon: [{ url: "/brand/logo_dark.png", type: "image/png" }],
-    shortcut: "/brand/logo_dark.png",
-    apple: "/brand/logo_dark.png",
+    icon: [{
+      url: "/_next/image?url=%2Fbrand%2Flogo_dark.png&w=64&q=82",
+      type: "image/webp",
+      sizes: "64x64",
+    }],
+    shortcut: "/_next/image?url=%2Fbrand%2Flogo_dark.png&w=64&q=82",
+    apple: "/_next/image?url=%2Fbrand%2Flogo_dark.png&w=192&q=84",
   },
   alternates: { canonical: "/" },
   robots: {
@@ -104,14 +121,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   };
 
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
+    <html
+      lang="ar"
+      dir="rtl"
+      className={`${alexandria.variable} ${manrope.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
         <script dangerouslySetInnerHTML={{ __html: `try{document.documentElement.dataset.theme=localStorage.getItem("hawk-theme")==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}` }} />
       </head>
       <body>
