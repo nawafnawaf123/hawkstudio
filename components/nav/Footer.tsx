@@ -71,7 +71,7 @@ export function Footer() {
         <ScrollAnim delay={0.08}><div className="footer-grid">
           <p>{text.intro}</p>
           <div className="footer-nav">
-            <Link href="/services" prefetch={false}>{t("nav.services")}</Link><Link href="/about" prefetch={false}>{t("nav.about")}</Link><Link href="/contact" prefetch={false}>{t("nav.contact")}</Link>
+            <Link href="/work" prefetch={false}>{t("nav.work")}</Link><Link href="/services" prefetch={false}>{t("nav.services")}</Link><Link href="/about" prefetch={false}>{t("nav.about")}</Link><Link href="/contact" prefetch={false}>{t("nav.contact")}</Link>
           </div>
           <div className="footer-contact">
             <a href={`mailto:${site.email}`}>{site.email}</a>

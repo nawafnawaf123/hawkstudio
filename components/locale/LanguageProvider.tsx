@@ -8,6 +8,7 @@ type Dict = Record<string, string>;
 
 export const translations: Record<Lang, Dict> = {
   ar: {
+    "nav.work": "الأعمال",
     "nav.services": "الخدمات",
     "nav.whyus": "لماذا Hawk",
     "nav.about": "عن الاستوديو",
@@ -20,6 +21,7 @@ export const translations: Record<Lang, Dict> = {
     "footer.email": "البريد",
   },
   en: {
+    "nav.work": "Work",
     "nav.services": "Services",
     "nav.whyus": "Why Hawk",
     "nav.about": "The Studio",

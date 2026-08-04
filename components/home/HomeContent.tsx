@@ -8,6 +8,7 @@ import { ScrollAnim } from "@/components/animations/ScrollAnim";
 import { MagneticLink } from "@/components/animations/MagneticLink";
 import { ScrollScene } from "@/components/animations/ScrollScene";
 import { MotionSignalLab } from "@/components/home/MotionSignalLab";
+import { WorkPreview } from "@/components/home/WorkPreview";
 
 const copy = {
   ar: {
@@ -140,8 +141,10 @@ export function HomeContent() {
 
       <MotionSignalLab />
 
+      <WorkPreview />
+
       <section id="process" className="process-section container-x">
-        <ScrollAnim><div className="process-intro"><div className="section-kicker"><span>03</span>{c.processLabel}</div><h2>{c.processTitle}</h2></div></ScrollAnim>
+        <ScrollAnim><div className="process-intro"><div className="section-kicker"><span>04</span>{c.processLabel}</div><h2>{c.processTitle}</h2></div></ScrollAnim>
         <ScrollAnim className="process-sequence">
           <div className="process-timeline">
             <div className="process-progress-head"><span>HAWK / WORKFLOW</span><span className="process-live"><i />{lang === "ar" ? "خطوة بخطوة" : "STEP BY STEP"}</span></div>
@@ -162,7 +165,7 @@ export function HomeContent() {
         </ScrollAnim>
       </section>
 
-      <section className="container-x final-cta-wrap"><ScrollAnim direction="zoom"><div className="final-cta"><div className="final-cta-mark">H</div><div className="section-kicker light"><span>04</span>{c.closeLabel}</div><h2>{c.closeTitle}</h2><Link href="/contact" prefetch={false} className="button button-lime">{c.closeButton}<ArrowUpLeft className="rtl-arrow" /></Link></div></ScrollAnim></section>
+      <section className="container-x final-cta-wrap"><ScrollAnim direction="zoom"><div className="final-cta"><div className="final-cta-mark">H</div><div className="section-kicker light"><span>05</span>{c.closeLabel}</div><h2>{c.closeTitle}</h2><Link href="/contact" prefetch={false} className="button button-lime">{c.closeButton}<ArrowUpLeft className="rtl-arrow" /></Link></div></ScrollAnim></section>
     </div>
   );
 }

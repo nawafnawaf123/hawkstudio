@@ -11,6 +11,7 @@ import { useLang } from "@/components/locale/LanguageProvider";
 import { whatsappLink } from "@/lib/site";
 
 const links = [
+  ["/work", "nav.work"],
   ["/services", "nav.services"],
   ["/why-us", "nav.whyus"],
   ["/about", "nav.about"],
