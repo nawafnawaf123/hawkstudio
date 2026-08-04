@@ -113,22 +113,15 @@ export function HomeContent() {
         <ScrollAnim direction="right" className="statement-reveal">
           <div className="statement-ambient" aria-hidden="true">
             <span className="statement-ambient-word">HAWK</span>
-            <div className="statement-ambient-panel">
-              <span className="statement-ambient-bar" />
-              <div>
-                <small>HAWK STUDIO</small>
-                <b>DESIGN × CODE × APPS</b>
-              </div>
-            </div>
-            <span className="statement-ambient-line"><i /></span>
+            <span className="statement-ambient-sweep"><i /></span>
           </div>
 
           <div className="statement-grid">
-            <div className="statement-side">
+            <div className="statement-meta">
               <div className="section-kicker"><span>01</span>{c.statementLabel}</div>
-              <div className="statement-side-card" aria-hidden="true">
-                <small>WEB / MOBILE / IDENTITY</small>
-                <b>Sharp digital products with a clear direction.</b>
+              <div className="statement-signature" aria-hidden="true">
+                <span>H</span>
+                <div><small>HAWK STUDIO</small><b>DESIGN / CODE / APPS</b></div>
               </div>
             </div>
 

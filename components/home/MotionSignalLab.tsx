@@ -29,7 +29,6 @@ const copy = {
 } as const;
 
 const icons = [PenTool, Braces, Smartphone];
-const chips = ["WEB", "ANDROID", "iOS", "MOTION"];
 
 export function MotionSignalLab() {
   const { lang } = useLang();
@@ -41,84 +40,68 @@ export function MotionSignalLab() {
   useEffect(() => {
     const shell = shellRef.current;
     if (!shell || typeof IntersectionObserver === "undefined") return;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.25 });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.25 },
+    );
+
     observer.observe(shell);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (!visible) return;
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % c.items.length), 3200);
+    const timer = window.setInterval(
+      () => setActive((current) => (current + 1) % c.items.length),
+      3400,
+    );
     return () => window.clearInterval(timer);
   }, [visible, c.items.length]);
-
-  const activeItem = c.items[active];
 
   return (
     <section className="motion-lab-section container-x">
       <ScrollAnim direction="zoom" className="motion-lab-reveal">
-        <div
-          ref={shellRef}
-          className="motion-lab-shell"
-          data-active={active}
-        >
+        <div ref={shellRef} className="motion-lab-shell" data-active={active}>
           <div className="motion-lab-head">
             <span>HAWK / SIGNAL SYSTEM</span>
             <span className="motion-lab-live"><i />{c.live}</span>
           </div>
 
-          <div className="motion-lab-grid">
-            <div className="motion-lab-copy">
-              <span className="section-kicker"><b>02.5</b>{c.eyebrow}</span>
-              <h2>{c.title}</h2>
-              <div className="motion-lab-list">
-                {c.items.map(([title, description], index) => {
-                  const Icon = icons[index];
-                  return (
-                    <button
-                      type="button"
-                      className={index === active ? "is-active" : ""}
-                      aria-pressed={index === active}
-                      onClick={() => setActive(index)}
-                      onPointerEnter={() => setActive(index)}
-                      key={title}
-                    >
-                      <span>0{index + 1}</span>
-                      <i><Icon /></i>
-                      <span><strong>{title}</strong><small>{description}</small></span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+          <div className="motion-lab-intro">
+            <span className="section-kicker"><b>02.5</b>{c.eyebrow}</span>
+            <h2>{c.title}</h2>
+          </div>
 
-            <div className="motion-lab-stage" aria-hidden="true">
-              <span className="motion-lab-word">HAWK</span>
-              <div className="motion-lab-beam" />
-              <div className="motion-lab-stage-panel">
-                <div className="motion-lab-stage-top">
-                  <small>0{active + 1}</small>
-                  <span>{c.eyebrow}</span>
-                </div>
-                <strong>{activeItem[0]}</strong>
-                <p>{activeItem[1]}</p>
-                <div className="motion-lab-stage-meter">
-                  {c.items.map((item, index) => (
-                    <span className={index === active ? "is-active" : ""} key={item[0]}>
-                      <i />
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="motion-lab-chips">
-                {chips.map((chip) => <span key={chip}>{chip}</span>)}
-              </div>
-            </div>
+          <div className="motion-lab-flow">
+            {c.items.map(([title, description], index) => {
+              const Icon = icons[index];
+              return (
+                <button
+                  type="button"
+                  className={`motion-lab-card${index === active ? " is-active" : ""}`}
+                  aria-pressed={index === active}
+                  onClick={() => setActive(index)}
+                  onPointerEnter={() => setActive(index)}
+                  key={title}
+                >
+                  <span className="motion-lab-card-number">0{index + 1}</span>
+                  <span className="motion-lab-card-icon"><Icon /></span>
+                  <span className="motion-lab-card-copy">
+                    <strong>{title}</strong>
+                    <small>{description}</small>
+                  </span>
+                  <span className="motion-lab-card-line"><i /></span>
+                </button>
+              );
+            })}
           </div>
 
           <div className="motion-lab-progress" aria-hidden="true">
             <i style={{ transform: `scaleX(${(active + 1) / c.items.length})` }} />
-            {c.items.map((_, index) => <span className={index <= active ? "is-active" : ""} key={index}>0{index + 1}</span>)}
+            {c.items.map((_, index) => (
+              <span className={index <= active ? "is-active" : ""} key={index}>0{index + 1}</span>
+            ))}
           </div>
         </div>
       </ScrollAnim>
