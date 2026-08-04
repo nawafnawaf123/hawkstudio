@@ -6,6 +6,7 @@ import { Footer } from "@/components/nav/Footer";
 import { LanguageProvider } from "@/components/locale/LanguageProvider";
 import { PageMotion } from "@/components/animations/PageMotion";
 import { site } from "@/lib/site";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const alexandria = Alexandria({
   subsets: ["arabic", "latin"],
@@ -141,6 +142,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <main>{children}</main>
           <Footer />
         </LanguageProvider>
+
+        <SpeedInsights />
       </body>
     </html>
   );
