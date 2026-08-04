@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Braces, PenTool, Smartphone } from "lucide-react";
 import { useLang } from "@/components/locale/LanguageProvider";
 import { ScrollAnim } from "@/components/animations/ScrollAnim";
@@ -41,30 +41,18 @@ export function MotionSignalLab() {
   useEffect(() => {
     const shell = shellRef.current;
     if (!shell || typeof IntersectionObserver === "undefined") return;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.2 });
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.25 });
     observer.observe(shell);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (!visible) return;
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % c.items.length), 2600);
+    const timer = window.setInterval(() => setActive((current) => (current + 1) % c.items.length), 3200);
     return () => window.clearInterval(timer);
   }, [visible, c.items.length]);
 
-  const moveSignal = (event: PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "mouse" || !shellRef.current) return;
-    const rect = shellRef.current.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 16;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 12;
-    shellRef.current.style.setProperty("--signal-x", `${x.toFixed(2)}px`);
-    shellRef.current.style.setProperty("--signal-y", `${y.toFixed(2)}px`);
-  };
-
-  const resetSignal = () => {
-    shellRef.current?.style.setProperty("--signal-x", "0px");
-    shellRef.current?.style.setProperty("--signal-y", "0px");
-  };
+  const activeItem = c.items[active];
 
   return (
     <section className="motion-lab-section container-x">
@@ -73,9 +61,6 @@ export function MotionSignalLab() {
           ref={shellRef}
           className="motion-lab-shell"
           data-active={active}
-          onPointerMove={moveSignal}
-          onPointerLeave={resetSignal}
-          style={{ "--signal-x": "0px", "--signal-y": "0px" } as CSSProperties}
         >
           <div className="motion-lab-head">
             <span>HAWK / SIGNAL SYSTEM</span>
@@ -83,20 +68,6 @@ export function MotionSignalLab() {
           </div>
 
           <div className="motion-lab-grid">
-            <div className="motion-lab-stage" aria-hidden="true">
-              <span className="motion-lab-word">HAWK</span>
-              <span className="motion-lab-orbit motion-lab-orbit-a"><i /></span>
-              <span className="motion-lab-orbit motion-lab-orbit-b"><i /></span>
-              <span className="motion-lab-crosshair" />
-              <div className="motion-lab-core">
-                <small>0{active + 1}</small>
-                <b>{c.eyebrow}</b>
-              </div>
-              <div className="motion-lab-chips">
-                {chips.map((chip) => <span key={chip}>{chip}</span>)}
-              </div>
-            </div>
-
             <div className="motion-lab-copy">
               <span className="section-kicker"><b>02.5</b>{c.eyebrow}</span>
               <h2>{c.title}</h2>
@@ -118,6 +89,29 @@ export function MotionSignalLab() {
                     </button>
                   );
                 })}
+              </div>
+            </div>
+
+            <div className="motion-lab-stage" aria-hidden="true">
+              <span className="motion-lab-word">HAWK</span>
+              <div className="motion-lab-beam" />
+              <div className="motion-lab-stage-panel">
+                <div className="motion-lab-stage-top">
+                  <small>0{active + 1}</small>
+                  <span>{c.eyebrow}</span>
+                </div>
+                <strong>{activeItem[0]}</strong>
+                <p>{activeItem[1]}</p>
+                <div className="motion-lab-stage-meter">
+                  {c.items.map((item, index) => (
+                    <span className={index === active ? "is-active" : ""} key={item[0]}>
+                      <i />
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="motion-lab-chips">
+                {chips.map((chip) => <span key={chip}>{chip}</span>)}
               </div>
             </div>
           </div>
