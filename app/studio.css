@@ -28,7 +28,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 section[id], article[id] { scroll-margin-top: 7rem; }
 ::selection { background: var(--lime); color: #10100f; }
 .container-x { max-width: 1480px; }
-.studio-route { animation: studio-page-enter .65s var(--studio-ease) both; }
+.studio-route { animation: none; }
 @keyframes studio-page-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
 /* Quiet, persistent navigation. */
@@ -403,6 +403,7 @@ html[data-theme="dark"] .footer-round-link:hover { color: #10100f; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .route-transition.is-active { display: none; }
   *, *:before, *:after { animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
   svg :is(path,line,polyline) { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
   .studio-route { animation: none; }
