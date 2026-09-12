@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownLeft, ArrowUpLeft, Braces, MoveUpLeft, PenTool, Rocket, Search, Smartphone, Sparkles } from "lucide-react";
 import { useLang } from "@/components/locale/LanguageProvider";
 import { ScrollAnim } from "@/components/animations/ScrollAnim";
 import { MagneticLink } from "@/components/animations/MagneticLink";
-import { ScrollScene } from "@/components/animations/ScrollScene";
+import { HeroVideo } from "@/components/home/HeroVideo";
 import { MotionSignalLab } from "@/components/home/MotionSignalLab";
 import { WorkPreview } from "@/components/home/WorkPreview";
 
@@ -66,7 +65,8 @@ export function HomeContent() {
 
   return (
     <div className="home-page">
-      <section className="editorial-hero">
+      <section className="editorial-hero cinematic-hero">
+        <HeroVideo />
         <div className="container-x hero-layout">
           <div className="hero-copy">
             <div className="hero-label"><span /><span>{c.label}</span></div>
@@ -79,31 +79,6 @@ export function HomeContent() {
               </div>
             </div>
           </div>
-
-          <ScrollScene className="hero-scene">
-            <div className="hero-stage" role="img" aria-label="Hawk Studio brand mark">
-              <Image
-                src="/brand/website_light.png"
-                alt=""
-                fill
-                priority
-                quality={88}
-                sizes="(max-width: 1024px) calc(100vw - 2.5rem), 38vw"
-                className="hero-brand-image theme-asset-dark"
-                draggable={false}
-              />
-              <Image
-                src="/brand/website_dark.png"
-                alt=""
-                fill
-                priority
-                quality={88}
-                sizes="(max-width: 1024px) calc(100vw - 2.5rem), 38vw"
-                className="hero-brand-image theme-asset-light"
-                draggable={false}
-              />
-            </div>
-          </ScrollScene>
         </div>
       </section>
 
