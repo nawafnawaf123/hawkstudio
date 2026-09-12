@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, type AnchorHTMLAttributes, type CSSProperties, type PointerEvent } from "react";
+import { useEffect, useRef, type AnchorHTMLAttributes, type CSSProperties, type PointerEvent } from "react";
 
 type MagneticLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
   href: string;
@@ -18,10 +18,11 @@ export function MagneticLink({
 }: MagneticLinkProps) {
   const ref = useRef<HTMLAnchorElement>(null);
   const frameRef = useRef(0);
+  useEffect(() => () => window.cancelAnimationFrame(frameRef.current), []);
 
   const handlePointerMove = (event: PointerEvent<HTMLAnchorElement>) => {
     onPointerMove?.(event);
-    if (event.pointerType !== "mouse" || !ref.current) return;
+    if (event.pointerType !== "mouse" || !ref.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const element = ref.current;
     const { left, top, width, height } = element.getBoundingClientRect();
@@ -37,6 +38,7 @@ export function MagneticLink({
 
   const handlePointerLeave = (event: PointerEvent<HTMLAnchorElement>) => {
     onPointerLeave?.(event);
+    window.cancelAnimationFrame(frameRef.current);
     if (!ref.current) return;
     ref.current.style.setProperty("--magnetic-x", "0px");
     ref.current.style.setProperty("--magnetic-y", "0px");

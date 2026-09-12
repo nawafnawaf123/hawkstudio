@@ -8,11 +8,11 @@ type Theme = "light" | "dark";
 
 export function ThemeSelector() {
   const { lang } = useLang();
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     const saved = localStorage.getItem("hawk-theme");
-    const active: Theme = saved === "dark" ? "dark" : "light";
+    const active: Theme = saved === "light" ? "light" : "dark";
     setTheme(active);
     document.documentElement.dataset.theme = active;
   }, []);
@@ -26,7 +26,7 @@ export function ThemeSelector() {
     const doc = document as Document & {
       startViewTransition?: (callback: () => void) => void;
     };
-    doc.startViewTransition ? doc.startViewTransition(update) : update();
+    typeof doc.startViewTransition === "function" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches ? doc.startViewTransition(update) : update();
     localStorage.setItem("hawk-theme", next);
   }
 

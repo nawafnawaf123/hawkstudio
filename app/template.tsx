@@ -1,27 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
-
-let hasMountedTemplate = false;
+import { PagePrelude } from "@/components/nav/PagePrelude";
 
 export default function Template({ children }: Readonly<{ children: React.ReactNode }>) {
-  const animateTransition = hasMountedTemplate;
-
-  useEffect(() => {
-    hasMountedTemplate = true;
-  }, []);
-
   return (
-    <>
-      <div
-        className={`route-transition ${animateTransition ? "is-active" : "is-initial"}`}
-        aria-hidden="true"
-      >
-        <i /><i /><i /><i />
-        <b>HAWK</b>
-        <span>DESIGN × CODE × MOTION</span>
-      </div>
-      <div className="route-content">{children}</div>
-    </>
+    <div className="studio-route"><PagePrelude />{children}</div>
   );
 }

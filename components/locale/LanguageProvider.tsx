@@ -73,7 +73,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const doc = document as Document & {
       startViewTransition?: (callback: () => void) => void;
     };
-    doc.startViewTransition ? doc.startViewTransition(update) : update();
+    typeof doc.startViewTransition === "function" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches ? doc.startViewTransition(update) : update();
     localStorage.setItem("hawk-lang", next);
   }, []);
 

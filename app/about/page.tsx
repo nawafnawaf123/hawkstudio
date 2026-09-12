@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Compass, Eye, HeartHandshake, Lightbulb, Shapes } from "lucide-react";
 import { useLang } from "@/components/locale/LanguageProvider";
 import { ScrollAnim } from "@/components/animations/ScrollAnim";
@@ -27,6 +28,11 @@ export default function AboutPage() {
   const { lang } = useLang(); const c = content[lang];
   return <div className="container-x py-16 md:py-24">
     <ScrollAnim><section className="about-hero"><span className="eyebrow-text">{c.eyebrow}</span><h1>{c.title}</h1><p className="about-lead">{c.lead}</p><p className="about-body">{c.body}</p></section></ScrollAnim>
+    <ScrollAnim><div className="studio-identity">
+      <Image src="/media/hawk-hero-v1-poster.webp" alt="" fill sizes="(max-width: 800px) 100vw, 90vw" />
+      <div className="studio-identity-top"><span>HAWK STUDIO</span><span>INDEPENDENT / INTENTIONAL</span></div>
+      <div className="studio-identity-copy"><span>{lang === "ar" ? "رؤية حادّة. أثر يبقى." : "Sharp vision. Lasting presence."}</span><p>DESIGN × ENGINEERING</p></div>
+    </div></ScrollAnim>
     <section className="mt-16 grid gap-4 md:grid-cols-2">
       {c.values.map(([title, desc], i) => { const Icon = icons[i]; return <ScrollAnim key={title} direction={i % 2 ? "left" : "right"} delay={i * .08}><article className="value-card"><span><Icon className="h-5 w-5" /></span><h2>{title}</h2><p>{desc}</p></article></ScrollAnim>; })}
     </section>

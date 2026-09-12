@@ -8,6 +8,7 @@ import { MagneticLink } from "@/components/animations/MagneticLink";
 import { HeroVideo } from "@/components/home/HeroVideo";
 import { MotionSignalLab } from "@/components/home/MotionSignalLab";
 import { WorkPreview } from "@/components/home/WorkPreview";
+import { StudioFAQ } from "@/components/home/StudioFAQ";
 
 const copy = {
   ar: {
@@ -80,6 +81,7 @@ export function HomeContent() {
             </div>
           </div>
         </div>
+        <div className="container-x hero-caption"><span>INDEPENDENT BY DESIGN.</span><a href="#studio">{lang === "ar" ? "اكتشف ما وراء الفكرة" : "Explore what comes next"}<ArrowDownLeft className="rtl-arrow" /></a><span>BEIRUT · EVERYWHERE</span></div>
       </section>
 
       <div className="ticker" aria-hidden="true"><div>{[...c.ticker, ...c.ticker, ...c.ticker, ...c.ticker].map((item, i) => <span key={`${item}-${i}`}>{item}<i /></span>)}</div></div>
@@ -109,18 +111,18 @@ export function HomeContent() {
         </ScrollAnim>
       </section>
 
+      <WorkPreview />
+
       <section className="services-section">
         <div className="container-x">
-          <ScrollAnim direction="left"><div className="section-heading"><div className="section-kicker"><span>02</span>{c.serviceLabel}</div><h2>{c.serviceTitle}</h2></div></ScrollAnim>
+          <ScrollAnim direction="left"><div className="section-heading"><div className="section-kicker"><span>03</span>{c.serviceLabel}</div><h2>{c.serviceTitle}</h2></div></ScrollAnim>
           <div className="home-services-list">
-            {c.services.map(([number, title, desc], i) => { const Icon = serviceIcons[i]; return <ScrollAnim key={number} direction={i % 2 ? "left" : "right"} delay={i * .06}><article className="home-service-row"><span className="service-row-number">{number}</span><span className="service-row-icon"><Icon /></span><h3>{title}</h3><p>{desc}</p><ArrowUpLeft className="service-row-arrow rtl-arrow" /></article></ScrollAnim> })}
+            {c.services.map(([number, title, desc], i) => { const Icon = serviceIcons[i]; return <ScrollAnim key={number} delay={i * .06}><details className="service-disclosure" name="studio-services" open={i === 0}><summary><span className="service-row-number">{number}</span><span className="service-row-icon"><Icon /></span><h3>{title}</h3><span className="disclosure-plus" aria-hidden="true" /></summary><div className="service-disclosure-body"><p>{desc}</p><Link href="/services" className="text-link">{lang === "ar" ? "استكشف الخدمة" : "Explore the service"}<ArrowUpLeft className="rtl-arrow" /></Link></div></details></ScrollAnim> })}
           </div>
         </div>
       </section>
 
       <MotionSignalLab />
-
-      <WorkPreview />
 
       <section id="process" className="process-section container-x">
         <ScrollAnim><div className="process-intro"><div className="section-kicker"><span>04</span>{c.processLabel}</div><h2>{c.processTitle}</h2></div></ScrollAnim>
@@ -144,7 +146,9 @@ export function HomeContent() {
         </ScrollAnim>
       </section>
 
-      <section className="container-x final-cta-wrap"><ScrollAnim direction="zoom"><div className="final-cta"><div className="final-cta-mark">H</div><div className="section-kicker light"><span>05</span>{c.closeLabel}</div><h2>{c.closeTitle}</h2><Link href="/contact" prefetch={false} className="button button-lime">{c.closeButton}<ArrowUpLeft className="rtl-arrow" /></Link></div></ScrollAnim></section>
+      <StudioFAQ />
+
+      <section className="container-x final-cta-wrap"><ScrollAnim direction="zoom"><div className="final-cta"><div className="final-cta-mark">H</div><div className="section-kicker light"><span>06</span>{c.closeLabel}</div><h2>{c.closeTitle}</h2><Link href="/contact" prefetch={false} className="button button-lime">{c.closeButton}<ArrowUpLeft className="rtl-arrow" /></Link></div></ScrollAnim></section>
     </div>
   );
 }

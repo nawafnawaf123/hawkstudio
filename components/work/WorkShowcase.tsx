@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpLeft, Download, Expand, X } from "lucide-react";
 import { ScrollAnim } from "@/components/animations/ScrollAnim";
 import { useLang } from "@/components/locale/LanguageProvider";
@@ -51,15 +51,23 @@ export function WorkShowcase() {
   const { lang } = useLang();
   const c = copy[lang];
   const [activeImage, setActiveImage] = useState<{ src: string; alt: string } | null>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!activeImage) return;
-    const close = (event: KeyboardEvent) => event.key === "Escape" && setActiveImage(null);
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    closeRef.current?.focus();
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveImage(null);
+      if (event.key === "Tab") { event.preventDefault(); closeRef.current?.focus(); }
+    };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", close);
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", close);
+      previousFocus?.focus();
     };
   }, [activeImage]);
 
@@ -153,7 +161,7 @@ export function WorkShowcase() {
 
       {activeImage && (
         <div className="work-lightbox" role="dialog" aria-modal="true" aria-label={activeImage.alt} onClick={() => setActiveImage(null)}>
-          <button type="button" aria-label={c.close} onClick={() => setActiveImage(null)}><X /></button>
+          <button ref={closeRef} type="button" aria-label={c.close} onClick={() => setActiveImage(null)}><X /></button>
           <div className="work-lightbox-image" onClick={(event) => event.stopPropagation()}>
             <Image src={activeImage.src} alt={activeImage.alt} fill sizes="90vw" quality={100} priority />
           </div>

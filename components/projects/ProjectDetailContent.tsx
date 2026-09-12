@@ -49,7 +49,7 @@ export function ProjectDetailContent({ project, nextProject }: { project: Studio
             <p>{c.summary}</p>
             <div className="project-detail-actions">
               <GlassButton href="/contact" tone="lime">{l.start}<ArrowUpLeft className="rtl-arrow" /></GlassButton>
-              <Link href="/#projects" className="project-back-link">{l.back}<ArrowDown /></Link>
+              <Link href="/work" className="project-back-link">{l.back}<ArrowDown /></Link>
             </div>
           </div>
           <div className="project-detail-visual" data-cursor="view">

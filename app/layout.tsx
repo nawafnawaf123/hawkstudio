@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./studio.css";
 import type { Metadata, Viewport } from "next";
 import { Alexandria, Manrope } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -186,11 +187,11 @@ export default function RootLayout({
             __html: `
               try {
                 document.documentElement.dataset.theme =
-                  localStorage.getItem("hawk-theme") === "dark"
-                    ? "dark"
-                    : "light";
+                  localStorage.getItem("hawk-theme") === "light"
+                    ? "light"
+                    : "dark";
               } catch (error) {
-                document.documentElement.dataset.theme = "light";
+                document.documentElement.dataset.theme = "dark";
               }
             `,
           }}

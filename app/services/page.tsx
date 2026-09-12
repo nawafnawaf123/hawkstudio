@@ -23,5 +23,14 @@ const icons=[Compass,Palette,Braces,Sparkles,MonitorSmartphone,Workflow];
 
 export default function ServicesPage(){
  const {lang}=useLang(); const c=content[lang];
- return <div className="container-x py-16 md:py-24"><ScrollAnim><section className="services-hero"><span className="eyebrow-text">{c.eyebrow}</span><h1>{c.title}</h1><p>{c.desc}</p></section></ScrollAnim><section className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{c.services.map(([title,desc],i)=>{const Icon=icons[i];return <ScrollAnim key={title} delay={(i%3)*.08}><article className="service-detail-card"><span><Icon className="h-5 w-5" /></span><small>0{i+1}</small><h2>{title}</h2><p>{desc}</p></article></ScrollAnim>})}</section><ScrollAnim><section id="development-services" className="services-search-copy mt-16"><span className="eyebrow-text">{c.seoLabel}</span><div><h2>{c.seoTitle}</h2><p>{c.seoBody}</p><p>{c.seoBody2}</p><div className="services-topic-list">{c.topics.map((topic)=><span key={topic}>{topic}</span>)}</div></div></section></ScrollAnim><ScrollAnim><section className="approach-strip mt-16"><div><span className="eyebrow-text">{c.approach}</span><h2>{c.approachTitle}</h2></div><Link className="btn btn-primary" href="/contact">{c.start}<ArrowUpRight className="h-4 w-4" /></Link></section></ScrollAnim></div>;
+ return <div className="container-x py-16 md:py-24">
+   <ScrollAnim><section className="services-hero"><span className="eyebrow-text">{c.eyebrow}</span><h1>{c.title}</h1><p>{c.desc}</p></section></ScrollAnim>
+   <section className="expertise-list">
+     {c.services.map(([title,desc],i)=>{const Icon=icons[i];return <ScrollAnim key={title}>
+       <article className="expertise-row"><small>0{i+1}</small><span><Icon /></span><h2>{title}</h2><p>{desc}</p></article>
+     </ScrollAnim>})}
+   </section>
+   <ScrollAnim><section id="development-services" className="services-search-copy mt-16"><span className="eyebrow-text">{c.seoLabel}</span><div><h2>{c.seoTitle}</h2><p>{c.seoBody}</p><p>{c.seoBody2}</p><div className="services-topic-list">{c.topics.map((topic)=><span key={topic}>{topic}</span>)}</div></div></section></ScrollAnim>
+   <ScrollAnim><section className="approach-strip mt-16"><div><span className="eyebrow-text">{c.approach}</span><h2>{c.approachTitle}</h2></div><Link className="btn btn-primary" href="/contact">{c.start}<ArrowUpRight className="h-4 w-4" /></Link></section></ScrollAnim>
+ </div>;
 }

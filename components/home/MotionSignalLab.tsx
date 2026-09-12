@@ -36,6 +36,7 @@ export function MotionSignalLab() {
   const shellRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [visible, setVisible] = useState(false);
+  const [manual, setManual] = useState(false);
 
   useEffect(() => {
     const shell = shellRef.current;
@@ -51,25 +52,27 @@ export function MotionSignalLab() {
   }, []);
 
   useEffect(() => {
-    if (!visible) return;
+    if (!visible || manual) return;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motion.matches) return;
     const timer = window.setInterval(
-      () => setActive((current) => (current + 1) % c.items.length),
-      3400,
+      () => { if (!document.hidden && !motion.matches) setActive((current) => (current + 1) % c.items.length); },
+      5000,
     );
     return () => window.clearInterval(timer);
-  }, [visible, c.items.length]);
+  }, [visible, manual, c.items.length]);
 
   return (
     <section className="motion-lab-section container-x">
       <ScrollAnim direction="zoom" className="motion-lab-reveal">
         <div ref={shellRef} className="motion-lab-shell" data-active={active}>
           <div className="motion-lab-head">
-            <span>HAWK / SIGNAL SYSTEM</span>
+            <span>THE HAWK APPROACH</span>
             <span className="motion-lab-live"><i />{c.live}</span>
           </div>
 
           <div className="motion-lab-intro">
-            <span className="section-kicker"><b>02.5</b>{c.eyebrow}</span>
+            <span className="section-kicker"><b>CRAFT</b>{lang === "ar" ? "الفكرة، بكل أبعادها" : "Every dimension of an idea"}</span>
             <h2>{c.title}</h2>
           </div>
 
@@ -81,8 +84,8 @@ export function MotionSignalLab() {
                   type="button"
                   className={`motion-lab-card${index === active ? " is-active" : ""}`}
                   aria-pressed={index === active}
-                  onClick={() => setActive(index)}
-                  onPointerEnter={() => setActive(index)}
+                  onClick={() => { setManual(true); setActive(index); }}
+                  onFocus={() => { setManual(true); setActive(index); }}
                   key={title}
                 >
                   <span className="motion-lab-card-number">0{index + 1}</span>

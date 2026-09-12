@@ -24,19 +24,25 @@ export function ScrollAnim({
   useEffect(() => {
     const element = ref.current;
     if (!element || typeof IntersectionObserver === "undefined") return;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motion.matches) { element.classList.add("reveal-visible"); return; }
+    // Above-fold content stays visible; only reveal elements entering from below.
+    if (element.getBoundingClientRect().top < window.innerHeight * .95 && once) { element.classList.add("reveal-visible"); return; }
+    element.classList.add("reveal-ready");
 
     const observer = new IntersectionObserver(([entry]) => {
-      element.classList.add("reveal-ready");
       if (entry.isIntersecting) {
         element.classList.add("reveal-visible");
         if (once) observer.disconnect();
       } else if (!once) {
         element.classList.remove("reveal-visible");
       }
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    }, { rootMargin: "0px 0px -4% 0px", threshold: 0.02 });
 
     observer.observe(element);
-    return () => observer.disconnect();
+    const reduce = () => { if (motion.matches) { element.classList.add("reveal-visible"); observer.disconnect(); } };
+    motion.addEventListener("change", reduce);
+    return () => { observer.disconnect(); motion.removeEventListener("change", reduce); };
   }, [once]);
 
   const style = {
